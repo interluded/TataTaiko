@@ -20,8 +20,14 @@ public class MP3Player implements Runnable {
     public void stop() {
         if (player != null) {
             player.close();
+            player = null;
+        }
+        if (playThread != null && playThread.isAlive()) {
+            playThread.interrupt();
+            playThread = null;
         }
     }
+
 
     @Override
     public void run() {
